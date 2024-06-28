@@ -19,7 +19,7 @@
 			padding: 10px;
 		}
 		.uploadResult ul li img{
-			width: 100px;
+			width: 20px;
 		}
 	</style>
 <title>Insert title here</title>
