@@ -27,7 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class PageController {
-	
 	@Autowired
 	private PageService service;
 	
@@ -35,11 +34,12 @@ public class PageController {
 	@RequestMapping("/list")
 	public String listWithPaging(Criteria cri, Model model) {
 		log.info("@# list");
-		log.info("@# cri => " + cri);
+		log.info("@# cri=>"+cri);
 		
 		ArrayList<BoardDTO> list = service.listWithPaging(cri);
-		int total = service.getTotalCount();
-		log.info("@# total => " + total);
+//		int total = service.getTotalCount();
+		int total = service.getTotalCount(cri);
+		log.info("@# total=>"+total);
 		
 		model.addAttribute("list", list);
 //		model.addAttribute("pageMaker", new PageDTO(123, cri));
@@ -47,6 +47,7 @@ public class PageController {
 		
 		return "list";
 	}
+	
 }
 
 

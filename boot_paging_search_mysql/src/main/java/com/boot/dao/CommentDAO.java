@@ -6,14 +6,13 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.boot.dto.BoardDTO;
-import com.boot.dto.Criteria;
+import com.boot.dto.CommentDTO;
 
 //실행시 매퍼파일을 읽어 들이도록 지정
 @Mapper
-public interface PageDAO {
-	public ArrayList<BoardDTO> listWithPaging(Criteria cri);
-//	Criteria 객체를 이용해서 페이징 처리
-	public int getTotalCount();
+public interface CommentDAO {
+	public void save(HashMap<String, String> param);
+	public ArrayList<CommentDTO> findAll(HashMap<String, String> param);
 }
 
 

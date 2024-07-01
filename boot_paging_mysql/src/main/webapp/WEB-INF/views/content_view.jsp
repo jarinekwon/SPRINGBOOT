@@ -28,6 +28,9 @@
 <body>
 	<table width="500" border=1>
 		<form name="contentfrm" method="post" action="modify">
+			<input type="hidden" name="boardNo" value="${pageMaker.boardNo}">
+			<input type="hidden" name="pageNum" value="${pageMaker.pageNum}">
+			<input type="hidden" name="amount" value="${pageMaker.amount}">
 			<tr>
 				<td>순번</td>
 				<td>
@@ -62,8 +65,11 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="수정">
-					&nbsp;&nbsp;<button type="button" onclick="location.href='delete?boardNo=${content_view.boardNo }'"><font color=red>삭제</font></button>
-					&nbsp;&nbsp;<a href="list">목록보기</a>
+					<!-- &nbsp;&nbsp;<button type="button" onclick="location.href='delete?boardNo=${content_view.boardNo }'">삭제</button> -->
+					&nbsp;&nbsp;<input type="submit" value="삭제" formaction="delete">
+					<!-- &nbsp;&nbsp;<a href="list">목록보기</a> -->
+					&nbsp;&nbsp;<input type="submit" value="목록보기" formaction="list">
+					<!-- formaction="list" -> name으로 설정된 값들을 가지고 이동 -->
 				</td>
 			</tr>
 		</form>

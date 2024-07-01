@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.boot.dto.BoardAttachDTO;
 import com.boot.dto.BoardDTO;
 import com.boot.dto.CommentDTO;
+import com.boot.dto.PageDTO;
 import com.boot.service.BoardService;
 import com.boot.service.CommentService;
 import com.boot.service.UploadService;
@@ -30,7 +31,7 @@ public class BoardController {
 	
 	@Autowired
 	private CommentService commentService;
-	
+
 	@Autowired
 	private UploadService uploadService;
 	
@@ -75,7 +76,7 @@ public class BoardController {
 		BoardDTO dto = service.contentView(param);
 		model.addAttribute("content_view", dto);
 		
-		// content_view.jsp에서 pageMaker를 가지고 페이징 처리
+//		content_view.jsp 에서 pageMaker 를 가지고 페이징 처리
 		model.addAttribute("pageMaker", param);
 		
 		// 해당 게시글에 작성된 댓글 리스트를 가져옴
@@ -89,13 +90,14 @@ public class BoardController {
 //	public String modify(@RequestParam HashMap<String, String> param) {
 	public String modify(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
 		log.info("@# modify");
-		log.info("@# param => " + param);
+		log.info("@# param=>"+param);
 		
 		service.modify(param);
 		
+//		페이지 이동시 뒤에 페이지번호, 글 갯수 추가
 		rttr.addAttribute("pageNum", param.get("pageNum"));
 		rttr.addAttribute("amount", param.get("amount"));
-		
+
 		return "redirect:list";
 	}
 	
@@ -103,15 +105,16 @@ public class BoardController {
 //	public String delete(@RequestParam HashMap<String, String> param) {
 	public String delete(@RequestParam HashMap<String, String> param, RedirectAttributes rttr) {
 		log.info("@# delete");
-		log.info("@# param => " + param);
-		log.info("@# boardNo => " + param.get("boardNo"));
+		log.info("@# param=>"+param);
+		log.info("@# boardNo=>"+param.get("boardNo"));
 		
 		List<BoardAttachDTO> fileList = uploadService.getFileList(Integer.parseInt(param.get("boardNo")));
-		log.info("@# fileList => " + fileList);
+		log.info("@# fileList=>"+fileList);
 		
 		service.delete(param);
 		uploadService.deleteFiles(fileList);
 		
+//		페이지 이동시 뒤에 페이지번호, 글 갯수 추가
 		rttr.addAttribute("pageNum", param.get("pageNum"));
 		rttr.addAttribute("amount", param.get("amount"));
 		

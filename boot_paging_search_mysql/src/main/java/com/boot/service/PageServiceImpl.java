@@ -25,7 +25,7 @@ public class PageServiceImpl implements PageService{
 	@Override
 	public ArrayList<BoardDTO> listWithPaging(Criteria cri) {
 		log.info("@# PageServiceImpl listWithPaging");
-		log.info("@# cri => " + cri);
+		log.info("@# cri=>"+cri);
 		
 		PageDAO dao = sqlSession.getMapper(PageDAO.class);
 		ArrayList<BoardDTO> list=dao.listWithPaging(cri);
@@ -34,14 +34,17 @@ public class PageServiceImpl implements PageService{
 	}
 
 	@Override
-	public int getTotalCount() {
+//	public int getTotalCount() {
+	public int getTotalCount(Criteria cri) {
 		log.info("@# PageServiceImpl getTotalCount");
 		
 		PageDAO dao = sqlSession.getMapper(PageDAO.class);
-		int total = dao.getTotalCount();
+//		int total=dao.getTotalCount();
+		int total=dao.getTotalCount(cri);
 		
 		return total;
 	}
+
 }
 
 
